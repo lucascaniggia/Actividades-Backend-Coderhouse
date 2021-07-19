@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://unpkg.com/rxjs@%5E7/dist/bundles/rxjs.umd.min.js"></script>
+    <title>Class 5 Challenge - 2</title>
+    <style>
+        input {border: 1px solid black; margin: 1px;}
+        #reversedInput {background-color: rgb(231, 250, 250);}
+    </style>
+</head>
+<body>
+
+    <input type="text" id="input">
+    <input type="text" id="reversedInput">
+
+    <script>
+        const { Observable, fromEvent, map, filter } = rxjs;
+        const input = document.querySelector('#input');
+        const reversedInput = document.querySelector('#reversedInput');
+
+        const mirrorStr = (str) => {
+            return str.split("").reverse().join("");
+        }
+
+        const myObservable = new Observable((observable) => {
+            let Output;
+            input.addEventListener('input', (ev) => {
+
+                if(input.value.toLowerCase() == 'error')
+                observable.error('An error has occurred. Closing...');
+
+                if(input.value.toLowerCase() == 'complete')
+                observable.complete();
+
+                if (ev.data == null) {
+                    Output = reversedInput.value.substr(1)
+                }
+                else {
+                    Output = mirrorStr(reversedInput.value);
+                    Output += ev.data;
+                    Output = mirrorStr(Output)
+                }
+
+                observable.next(Output)
+            });
+        })
+
+        const nextFunction = (data) => {
+            reversedInput.value = data;
+        }
+
+        const errorFunction = (msg) =>{
+            console.log(msg);
+            unsuscribe();
+        }
+
+        const completeFunction = () => {
+            console.log('Program completed. Closing...');
+            unsuscribe();
+        }
+
+        const unsuscribe = () => {
+            input.disabled = true;
+            input.value = '';
+            reversedInput.disabled = true;
+            reversedInput.value = '';
+            sub.unsubscribe();
+        }
+
+        const handler = {
+            next: nextFunction,
+            error: errorFunction,
+            complete: completeFunction
+        }
+
+        const sub = myObservable.pipe(
+            map((data) => mirrorStr(data))
+        )
+        .subscribe(handler);
+
+        setTimeout(() => {
+            console.log('Time has expired. Closing...');
+            unsuscribe();
+        }, 30000);
+    </script>
+</body>
+</html>
