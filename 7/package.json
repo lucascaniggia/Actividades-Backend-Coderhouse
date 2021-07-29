@@ -1,0 +1,24 @@
+{
+  "name": "clase7challenge",
+  "version": "1.0.0",
+  "description": "clase 7 challenge",
+  "main": "clase7.js",
+  "scripts": {
+    "transpile": "babel src --out-dir dist",
+    "start": "node dist/clase7.js",
+    "build": "babel src --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lucas caniggia",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "@babel/node": "^7.14.7",
+    "@babel/preset-env": "^7.14.8",
+    "nodemon": "^2.0.12"
+  }
+}
