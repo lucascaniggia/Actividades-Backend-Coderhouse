@@ -1,0 +1,45 @@
+html {
+  height: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body,
+.containerBody {
+  min-height: 100% !important;
+  height: 100%;
+}
+
+.containerBody {
+  background: blue;
+}
+
+.containerBody {
+  display: flex;
+}
+
+.form {
+  padding: 5%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  background-color: #faf3dd;
+  flex-wrap: wrap;
+}
+
+.list {
+  padding: 5%;
+  width: 75%;
+  background-color: #d1d8c8;
+  overflow-y: auto;
+  visibility: visible;
+}
+
+.mb3 {
+  margin-top: 15px;
+}
