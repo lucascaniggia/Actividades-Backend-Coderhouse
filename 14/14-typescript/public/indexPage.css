@@ -1,0 +1,79 @@
+html {
+  height: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body,
+.containerBody {
+  min-height: 100% !important;
+  height: 100%;
+}
+
+.containerBody {
+  background: rgb(187, 59, 59);
+  display: flex;
+}
+
+
+.enterProduct {
+  padding: 5%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  background-color: #faf3dd;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 1%;
+  margin-top: 2px;
+}
+
+.listContainer {
+  padding: 5%;
+  width: 40%;
+  background-color: #f6f4d2;
+  overflow-y: auto;
+  visibility: visible;
+}
+
+.chatContainer {
+  padding: 5% 0 0 2%;
+  width: 35%;
+  background-color: #e6e7e5;
+  overflow-y: auto;
+  visibility: visible;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.chatMessage {
+  padding: 2%;
+}
+
+.chatEmail {
+  color: rgb(6, 6, 182);
+  font-weight: bold;
+}
+
+.chatMsg {
+  color: rgb(3, 92, 3);
+  font-style: italic;
+}
+
+.chatDate {
+  font-size:xx-small;
+}
+
+/* .mb3 {
+  margin-top: 15px;
+} */
