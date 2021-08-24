@@ -2,9 +2,10 @@ const socket = io.connect("http://localhost:8080", { forceNew: true });
 const myEmail = "lucascaniggia5@gmail.com";
 
 socket.on("products", (products) => {
+  console.log("por aca paso bien");
   const html = products
     .map((product) => {
-      console.log(product.thumbnail  );
+      console.log(product.thumbnail);
       return `<div>
                   <strong><h3>${product.title}</h3></strong>
                   <h4>$ ${product.price}</h4>
@@ -12,7 +13,6 @@ socket.on("products", (products) => {
               </div>`;
     })
     .join(" ");
-
   document.getElementById("list").innerHTML = html;
 });
 
@@ -21,11 +21,11 @@ socket.on("message", (chat) => {
   let chatParse = JSON.parse(chat);
   console.log(chatParse);
   const html = chatParse
-    .map((chatMessage) => {
+    .map((message) => {
       return `<div>
-                  <div class="chatEmail">${chatMessage.email}</div>
-                  <div class="chatMsg">${chatMessage.message}</div>
-                  <div class="chatDate">${chatMessage.date}</div>
+                  <div class="chatEmail">${message.email}</div>
+                  <div class="chatMsg">${message.message}</div>
+                  <div class="chatDate">${message.date}</div>
               </div>`;
     })
     .join(" ");
@@ -40,7 +40,7 @@ chatForm.addEventListener("submit", (e) => {
   // Get message text
   let chat = {
     email: e.target.elements.email.value,
-    chatMessage: e.target.elements.msg.value,
+    message: e.target.elements.msg.value,
   };
 
   if (!msg) {

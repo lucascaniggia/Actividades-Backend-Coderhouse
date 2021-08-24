@@ -17,7 +17,7 @@ myServer.on("error", (err) => {
 });
 
 // Getting Public folder
-const publicPath = path.resolve(__dirname, "./public");
+const publicPath = path.resolve(__dirname, "../public");
 app.use(express.static(publicPath));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,34 +34,34 @@ const readFile = () => {
     }
 };
 
-// // Saving messages (array) in .JSON file
-// const saveMessages = (messages) => {
-//     fs.writeFileSync(
-//         "./chatFile.txt",
-//         JSON.stringify(messages, undefined, 2),
-//         "utf-8"
-//     );
-// };
+// Saving messages (array) in .JSON file
+const saveMessages = (messages) => {
+    fs.writeFileSync(
+        "./chatFile.txt",
+        JSON.stringify(messages, undefined, 2),
+        "utf-8"
+    );
+};
 
-// // Saving messages in file
-// const saveNewMessage = (data) => {
-//     let messages = JSON.parse(readFile());
-//     let now = new Date();
-//     let date = moment(now).format("DD/MM/YYYY HH:MM:SS");
-//     const newMessage = { email: data.email, date: date, message: data.message };
-//     messages.push(newMessage);
-//     saveMessages(messages);
-// };
+// Saving messages in file
+const saveNewMessage = (data) => {
+    let messages = JSON.parse(readFile());
+    let now = new Date();
+    let date = moment(now).format("DD/MM/YYYY HH:MM:SS");
+    const newMessage = { email: data.email, date: date, message: data.message };
+    messages.push(newMessage);
+    saveMessages(messages);
+};
 
 
-//Routers
+// Routers
 // app.use("/api/products", productsApi);
 
 // Routes
 
 // Index
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/indexPage.html", { products });
+    res.sendFile(publicPath + "/indexPage.html", { products });
 });
 
 // Saving products
@@ -82,7 +82,6 @@ app.post("/save", (req,res) => {
     };
 
     products.push(newProduct)
-    console.log(publicPath)
     res.status(201).sendFile(`${publicPath}/indexPage.html`, { products });
 });
 
@@ -103,13 +102,13 @@ socketIoServer.on("connection", (socket) => {
         console.log(message);
     });
 
-    // // Listening to chatMessage
-    // socket.on("chatMessage", (chat) => {
-    //     saveNewMessage(chat);
-    //     const chatFile = readFile();
+    // Listening to chatMessage
+    socket.on("chatMessage", (chat) => {
+        saveNewMessage(chat);
+        const chatFile = readFile();
 
-    //     // Sending chat to users
-    //     socket.emit("message", chatFile);
-    //     socket.broadcast.emit("message", chatFile);
-    // });
+        // Sending chat to users
+        socket.emit("message", chatFile);
+        socket.broadcast.emit("message", chatFile);
+    });
 });

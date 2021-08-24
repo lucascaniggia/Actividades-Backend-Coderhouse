@@ -14,12 +14,10 @@ body,
 }
 
 .containerBody {
-  background: blue;
-}
-
-.containerBody {
+  background: rgb(187, 59, 59);
   display: flex;
 }
+
 
 .enterProduct {
   padding: 5%;
@@ -34,22 +32,28 @@ body,
 
 .button {
   padding: 1%;
+  margin-top: 2px;
 }
 
 .listContainer {
   padding: 5%;
-  width: 35%;
+  width: 40%;
   background-color: #f6f4d2;
   overflow-y: auto;
   visibility: visible;
 }
 
 .chatContainer {
-  padding: 5%;
-  width: 75%;
-  background-color: #d1d8c8;
+  padding: 5% 0 0 2%;
+  width: 35%;
+  background-color: #e6e7e5;
   overflow-y: auto;
   visibility: visible;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-weight: bold;
 }
 
 .chatMessage {
